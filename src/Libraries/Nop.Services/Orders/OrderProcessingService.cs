@@ -2310,6 +2310,11 @@ namespace Nop.Services.Orders
 
             //check order status
             CheckOrderStatus(order);
+
+            if (order.PaymentStatus == PaymentStatus.Authorized)
+            {
+                _eventPublisher.Publish(new OrderAuthorizedEvent(order));
+            }
         }
 
         /// <summary>
